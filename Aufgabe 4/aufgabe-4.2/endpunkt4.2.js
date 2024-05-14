@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 const app = express();
 const port = 3000;
 const namen = [
@@ -23,7 +23,7 @@ const namen = [
   "Hannah",
   "Leon"
 ];
-const jsonObject= {
+let jsonObject= {
   "Vorname": "Max",
   "Nachname": "Mustermann",
   "Alter": 30,
@@ -72,6 +72,21 @@ app.get('/cuck', async(request, response) => {
   witz = witz.replace("Chuck Norris", request.query.name)
   console.log(witz)
   response.send(witz);
+});
+
+app.patch('/me', (request, response) => {
+  const newMeObject = request.query
+  const newjsonObject= Object.keys(newMeObject);
+  const meObject = Object.keys(jsonObject);
+for (let i = 0; i < newjsonObject.length; i++) {
+for (let j = 0; j < meObject.length; j++) {
+  if(meObject[j]==newjsonObject[i]){
+    let old =JSON.stringify(jsonObject).replace(Object.values(jsonObject)[j], Object.values(newMeObject)[i])
+    jsonObject = JSON.parse(old)
+  }
+}
+}
+response.send(jsonObject)
 });
 
 app.listen(port, () => {
