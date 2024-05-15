@@ -2,6 +2,10 @@
   "type": "module",
   "dependencies": {
     "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.0",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
   }
 }
